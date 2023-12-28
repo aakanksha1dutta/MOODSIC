@@ -528,7 +528,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 8,
+=======
+   "execution_count": 138,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -714,7 +718,11 @@
        "max       1.000000  "
       ]
      },
+<<<<<<< HEAD
+     "execution_count": 8,
+=======
      "execution_count": 138,
+>>>>>>> a009ac4 (temp)
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -734,6 +742,9 @@
   },
   {
    "cell_type": "code",
+<<<<<<< HEAD
+   "execution_count": 9,
+=======
    "execution_count": 142,
    "metadata": {},
    "outputs": [
@@ -934,7 +945,8 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 143,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -990,7 +1002,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 10,
+=======
+   "execution_count": 144,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1022,7 +1038,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 11,
+=======
+   "execution_count": 145,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1063,7 +1083,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 12,
+=======
+   "execution_count": 146,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1072,7 +1096,11 @@
        "array([0, 1, 2, 3])"
       ]
      },
-     "execution_count": null,
+<<<<<<< HEAD
+     "execution_count": 12,
+=======
+     "execution_count": 146,
+>>>>>>> a009ac4 (temp)
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1087,7 +1115,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 13,
+=======
+   "execution_count": 147,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1096,7 +1128,11 @@
        "array(['calm', 'energetic', 'happy', 'sad'], dtype=object)"
       ]
      },
-     "execution_count": null,
+<<<<<<< HEAD
+     "execution_count": 13,
+=======
+     "execution_count": 147,
+>>>>>>> a009ac4 (temp)
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1107,7 +1143,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 14,
+=======
+   "execution_count": 148,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [],
    "source": [
@@ -1146,7 +1186,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 15,
+=======
+   "execution_count": 149,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1194,17 +1238,26 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 16,
+=======
+   "execution_count": 150,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
+<<<<<<< HEAD
       "rf with 100 trees:  0.5429189996267264\n",
-      "rf with 100 trees:  0.5414333706606943\n",
-      "rf with 200 trees:  0.5436207540126913\n",
-      "rf with 500 trees:  0.5400671892497201\n"
+      "rf with 200 trees:  0.5428592758491975\n",
+      "rf with 500 trees:  0.545726017170586\n"
+=======
+      "rf with 100 trees:  0.5435834266517358\n",
+      "rf with 200 trees:  0.5541843971631205\n",
+      "rf with 500 trees:  0.5435908921239269\n"
+>>>>>>> a009ac4 (temp)
      ]
     }
    ],
@@ -1238,7 +1291,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 17,
+=======
+   "execution_count": 151,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1360,7 +1417,11 @@
        "4         -0.059693 -0.106788  0.133835 -0.002868  "
       ]
      },
+<<<<<<< HEAD
+     "execution_count": 17,
+=======
      "execution_count": 151,
+>>>>>>> a009ac4 (temp)
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1380,7 +1441,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 18,
+=======
+   "execution_count": 152,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
@@ -1414,16 +1479,26 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 19,
+=======
+   "execution_count": 153,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "rf with 100 trees:  0.5343934303844718\n",
-      "rf with 200 trees:  0.5386188876446435\n",
-      "rf with 500 trees:  0.5329451287793953\n"
+<<<<<<< HEAD
+      "rf with 100 trees:  0.527331093691676\n",
+      "rf with 200 trees:  0.5358118701007839\n",
+      "rf with 500 trees:  0.5357745427398283\n"
+=======
+      "rf with 100 trees:  0.5414259051885032\n",
+      "rf with 200 trees:  0.5329675251959687\n",
+      "rf with 500 trees:  0.5350877192982456\n"
+>>>>>>> a009ac4 (temp)
      ]
     }
    ],
@@ -1450,7 +1525,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+<<<<<<< HEAD
+   "execution_count": 20,
+=======
+   "execution_count": 154,
+>>>>>>> a009ac4 (temp)
    "metadata": {},
    "outputs": [],
    "source": [
@@ -1462,39 +1541,16 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Cross Validating SVM and Logistic Regression"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 155,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "y = track_df['mood'].copy()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#SVM \n",
-    "#using radial kernel\n",
-    "from sklearn import svm\n",
-    "rbf = svm.SVC(kernel='rbf', gamma=0.5, C=0.1).fit(features_df, y)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
+<<<<<<< HEAD
     "### logistic regression"
+=======
+    "## Cross Validating SVM and Logistic Regression"
+>>>>>>> a009ac4 (temp)
    ]
   },
   {
    "cell_type": "code",
+<<<<<<< HEAD
    "execution_count": 22,
    "metadata": {},
    "outputs": [
@@ -1512,6 +1568,13 @@
     "\n",
     "lr = LogisticRegression()\n",
     "print(\"lr:\",stat.mean(cross_val_score(lr, features_df,track_df['y'], cv = 15)))"
+=======
+   "execution_count": 155,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y = track_df['mood'].copy()"
+>>>>>>> a009ac4 (temp)
    ]
   },
   {
@@ -1519,7 +1582,16 @@
    "execution_count": null,
    "metadata": {},
    "outputs": [],
+<<<<<<< HEAD
    "source": []
+=======
+   "source": [
+    "#SVM \n",
+    "#using radial kernel\n",
+    "from sklearn import svm\n",
+    "rbf = svm.SVC(kernel='rbf', gamma=0.5, C=0.1).fit(features_df, y)"
+   ]
+>>>>>>> a009ac4 (temp)
   }
  ],
  "metadata": {
