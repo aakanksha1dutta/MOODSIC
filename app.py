@@ -188,15 +188,10 @@ if(go):
         user_prop = report['prop']*100
         user_df = report['dataframe']
 
-        #load bb year end for comparison
-        bb_data = pickle.load(open("bb.pk1", "rb"))
-        bb_energetic_tracks = bb_data['energetic_tracks']
-        bb_prop = bb_data['prop']*100
-        bb_df = bb_data['dataframe']
-        bb_tempo_chart = bb_data['tempo']
-        bb_key_chart = bb_data['key']
-        bb_otherfeatures_chart = bb_data['otherFeatures']
-        bb_mode_chart = bb_data['mode']
+   
+        bb_data = pickle.load(open("visuals.pk1", "rb"))
+        bb_prop = bb_data['prop']
+        
 
         ratio = ((user_prop-bb_prop)/bb_prop)*100
 
@@ -211,11 +206,23 @@ if(go):
             with col1:
                 st.subheader(":green[Your] Energetic Tracks")
                 st.dataframe(user_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
+
             
             with col2:
                 st.subheader(":green[BB Year End] Energetic Tracks")
-                st.dataframe(bb_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
-               
+                st.dataframe(bb_data['energetic_tracks'], hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
+                st.subheader("Composition Breakdown")
+                st.pyplot(bb_data['piechart'])
+                st.subheader("Loudness")
+                st.pyplot(bb_data['loudness'])
+                st.subheader("Key/Pitch")
+                st.pyplot(bb_data['key'])
+                st.subheader("Tempo (Beats Per Minute)")
+                st.pyplot(bb_data['tempo'])
+                st.subheader("Major vs Minor Scale")
+                st.pyplot(bb_data['mode'])
+                st.subheader("Other Features")
+                st.pyplot(bb_data['otherFeatures'])
                 
 
 
