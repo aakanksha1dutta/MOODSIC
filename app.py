@@ -188,7 +188,16 @@ if(go):
         user_prop = report['prop']*100
         user_df = report['dataframe']
 
-        bb_prop = 61
+        #load bb year end for comparison
+        bb_data = pickle.load(open("bb.pk1", "rb"))
+        bb_energetic_tracks = bb_data['energetic_tracks']
+        bb_prop = bb_data['prop']*100
+        bb_df = bb_data['dataframe']
+        bb_tempo_chart = bb_data['tempo']
+        bb_key_chart = bb_data['key']
+        bb_otherfeatures_chart = bb_data['otherFeatures']
+        bb_mode_chart = bb_data['mode']
+
         ratio = ((user_prop-bb_prop)/bb_prop)*100
 
         #display
@@ -196,7 +205,7 @@ if(go):
 
             st.metric(label = ":green[%] of Energetic Tracks in Collection",value = "{:.2f}%".format(user_prop), delta="{:.2f}%".format(ratio))
             st.caption("* ↑↓ shows the percentage difference between your collection and BB chart")
-            
+
             col1, col2 = st.columns(2)
 
             with col1:
@@ -204,21 +213,11 @@ if(go):
                 st.dataframe(user_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
             
             with col2:
-                st.subheader(":green[BB Year End] 2023")
+                st.subheader(":green[BB Year End] Energetic Tracks")
+                st.dataframe(bb_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
                
                 
 
-
-
-
-
-
-
-
-
-
-    ##with st.sidebar:
-       ##
 
 
 
