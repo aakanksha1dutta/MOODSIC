@@ -50,7 +50,7 @@ st.set_page_config(
 #sidebar
 with st.sidebar:
     st.title("Make a selection! :zap:")
-    method = st.selectbox("Choose your collection",('Playlist', 'Album', "Artist's Top 10"))
+    method = st.selectbox("Choose your collection",('Playlist', 'Album', "Artist Top 10"))
     link = st.text_input("Enter your Spotify link here:")
     st.caption("Your collection must be publicly accessible!")
     go = st.button("GO")
@@ -67,6 +67,9 @@ st.write('Powered by a machine learning algorithm model called Support Vector Ma
          of your collection with  *Billboard Year End Hot 100 Chart of 2023*.')
 st.markdown('`Note: Due to Spotify API limits, M00DSIC can only read first 100 tracks of a playlist or an album and Top 10 tracks\
             of an artist. Since this is a hobby project, we are limiting our API calls to the allowed limits.`')
+st.divider()
+main_area = st.empty()
+
 
 #Add visualization 
 
@@ -136,12 +139,16 @@ if(go):
 
     def get_class(url, method):
         id = extract_uri(url)
-        if method=='playlist':
-            track_ids, track_names, track_artists = get_playlist_tracks(id)
-        elif method=='album':
-            track_ids, track_names, track_artists = get_album_tracks(id)
-        elif method=='artist':
-            track_ids, track_names, track_artists = get_artist_tracks(id)
+        try:
+            if method=='playlist':
+                track_ids, track_names, track_artists = get_playlist_tracks(id)
+            elif method=='album':
+                track_ids, track_names, track_artists = get_album_tracks(id)
+            elif method=='artist':
+                track_ids, track_names, track_artists = get_artist_tracks(id)
+        except:
+            st.sidebar.write("Choose a valid method and a publicly accessible playlst/album/artist URL!")
+            return
             
 
         #finding first artists
@@ -171,13 +178,47 @@ if(go):
     
     #end of helper functions --------------------------------------------------------------------------------
     method = method.split()[0].lower()
-    st.write(method)
-    #report = get_class(link, method)
+    report = get_class(link, method)
+
+    if report:
+        main_area.text("\n \n")
+
+        #set the variables
+        user_energetic_tracks = report['energetic_tracks']
+        user_prop = report['prop']*100
+        user_df = report['dataframe']
+
+        bb_prop = 61
+        ratio = ((user_prop-bb_prop)/bb_prop)*100
+
+        #display
+        with main_area.container():
+
+            st.metric(label = ":green[%] of Energetic Tracks in Collection",value = "{:.2f}%".format(user_prop), delta="{:.2f}%".format(ratio))
+            st.caption("* ↑↓ shows the percentage difference between your collection and BB chart")
+            
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.subheader(":green[Your] Energetic Tracks")
+                st.dataframe(user_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
+            
+            with col2:
+                st.subheader(":green[BB Year End] 2023")
+               
+                
 
 
 
-    with st.sidebar:
-        st.write("in action now")
+
+
+
+
+
+
+
+    ##with st.sidebar:
+       ##
 
 
 
