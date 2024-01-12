@@ -176,6 +176,7 @@ if(go):
 
         return {'energetic_tracks': energetic_tracks, 'prop': prop, 'dataframe':df}
     
+    
     #end of helper functions --------------------------------------------------------------------------------
     method = method.split()[0].lower()
     report = get_class(link, method)
@@ -209,19 +210,20 @@ if(go):
 
             
             with col2:
-                st.subheader(":green[BB Year End] Energetic Tracks")
+                st.header(":green[BB Year End] Breakdown")
+                st.subheader(":green[Energetic] Tracks")
                 st.dataframe(bb_data['energetic_tracks'], hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
-                st.subheader("Composition Breakdown")
+                st.subheader(":green[Composition]")
                 st.pyplot(bb_data['piechart'])
-                st.subheader("Loudness")
+                st.subheader(":green[Loud]ness")
                 st.pyplot(bb_data['loudness'])
-                st.subheader("Key/Pitch")
+                st.subheader(":green[Key]/Pitch")
                 st.pyplot(bb_data['key'])
-                st.subheader("Tempo (Beats Per Minute)")
+                st.subheader(":green[Tempo] (Beats Per Minute)")
                 st.pyplot(bb_data['tempo'])
-                st.subheader("Major vs Minor Scale")
+                st.subheader("Major vs Minor :green[Scale]")
                 st.pyplot(bb_data['mode'])
-                st.subheader("Other Features")
+                st.subheader("Other :green[Features]")
                 st.pyplot(bb_data['otherFeatures'])
                 
 
