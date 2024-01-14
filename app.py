@@ -8,6 +8,8 @@ import re
 import pickle
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 #api keys
@@ -176,6 +178,86 @@ if(go):
 
         return {'energetic_tracks': energetic_tracks, 'prop': prop, 'dataframe':df}
     
+    def piechart(df1, df2): 
+        #df1 is energetic, df2 is whole df   
+        # calculating percentage of songs that were energetic
+        prop = len(df1)/len(df2)*100
+        print(prop)
+        data = [prop,(100-prop)]
+        labels = ['Energetic','Not Energetic']
+        colors = ["#2E8B57", "#646467"]
+        fig, axs = plt.subplots()
+        fig.set_facecolor('#0F0F0F')
+        axs.pie(data, labels=labels, labeldistance=0.4, autopct='%.0f%%', wedgeprops = {"edgecolor" : "black", 'linewidth': 2, 'antialiased': True}, colors = colors, 
+        textprops=dict(color='w',weight='bold')) 
+        return fig
+    
+    def plot_tempo(df):
+        fig, axs = plt.subplots()
+        sns.kdeplot(data = df, x='tempo', color="#2E8B57", ax=axs)
+        plt.xlim(0,300)
+        fig.set_facecolor('#0F0F0F')
+        axs.set_facecolor('#0F0F0F')  
+        axs.spines['bottom'].set_color('white')
+        axs.spines['left'].set_color('white')
+        axs.tick_params(color='white', labelcolor='white')
+        axs.set_xlabel('Tempo / BPM').set_color('white')
+        axs.set_ylabel('Probability Density Function').set_color('white')
+        return fig
+    
+    def plot_loudness(df):
+        fig, axs = plt.subplots()
+        sns.kdeplot(data = df, x = 'loudness', color="#2E8B57")
+        fig.set_facecolor('#0F0F0F')
+        axs.set_facecolor('#0F0F0F')  
+        axs.spines['bottom'].set_color('white')
+        axs.spines['left'].set_color('white')
+        axs.tick_params(color='white', labelcolor='white')
+        axs.set_xlabel('Loudness / dB').set_color('white')
+        axs.set_ylabel('Probability Density Function').set_color('white')
+        return fig
+    
+    def plot_mode(df):
+        colours = ["seagreen", "#646467"]
+        fig, axs = plt.subplots()
+        sns.countplot(df, x="mode", stat="percent", hue="mode", palette=colours, ax=axs)
+        plt.legend(labels = ['minor', 'major'])
+        fig.set_facecolor('#0F0F0F')
+        axs.set_facecolor('#0F0F0F')  
+        axs.spines['bottom'].set_color('white')
+        axs.spines['left'].set_color('white')
+        axs.tick_params(color='white', labelcolor='white')
+        axs.set_xlabel('Scale').set_color('white')
+        axs.set_ylabel('Percentage').set_color('white')
+        return fig
+
+    def plot_key (df):
+        fig, axs = plt.subplots()
+        colors = sns.light_palette("seagreen", as_cmap=True)
+        sns.countplot(df, x = "key", stat="percent", hue="key", legend=False, palette=colors, ax=axs)
+        fig.set_facecolor('#0F0F0F')
+        axs.set_facecolor('#0F0F0F')  
+        axs.spines['bottom'].set_color('white')
+        axs.spines['left'].set_color('white')
+        axs.tick_params(color='white', labelcolor='white')
+        axs.set_xlabel('Key (Pitch Class Notation)').set_color('white')
+        axs.set_ylabel('Percentage').set_color('white')    
+        return fig
+    
+    def plot_otherFeatures(df):
+        features_adj = df.drop(['track_id', 'track_name', 'first_artist', 'key', 'mode', 'loudness','tempo', 'uri', 'type',
+                                            'id','track_href', 'analysis_url', 'duration_ms', 'time_signature','pred'], axis=1)
+        fig, axs = plt.subplots()
+        colors = sns.light_palette("seagreen",7)
+        fig.set_facecolor('#0F0F0F')
+        axs.set_facecolor('#0F0F0F')  
+        axs.spines['bottom'].set_color('white')
+        axs.spines['left'].set_color('white')
+        axs.tick_params(color='white', labelcolor='white')
+        axs.set_xlabel('Value').set_color('white')
+        axs.set_ylabel('Track Features').set_color('white')
+        sns.barplot(data = features_adj, orient="y", errorbar=None, palette=colors, ax=axs)
+        return fig
     
     #end of helper functions --------------------------------------------------------------------------------
     method = method.split()[0].lower()
@@ -205,9 +287,22 @@ if(go):
             col1, col2 = st.columns(2)
 
             with col1:
-                st.subheader(":green[Your] Energetic Tracks")
+                st.header(":green[Your Collection] Breakdown")
+                st.subheader(":green[Energetic] Tracks")
                 st.dataframe(user_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
-
+                st.subheader(":green[Composition]")
+                st.pyplot(piechart(user_energetic_tracks,user_df))
+                st.subheader(":green[Loud]ness")
+                st.pyplot(plot_loudness(user_df))
+                st.caption("In decibels (dB).")
+                st.subheader(":green[Key]/Pitch")
+                st.pyplot(plot_key(user_df))
+                st.subheader(":green[Tempo] (Beats Per Minute)")
+                st.pyplot(plot_tempo(user_df))
+                st.subheader("Major vs Minor :green[Scale]")
+                st.pyplot(plot_mode(user_df))
+                st.subheader("Other :green[Features]")
+                st.pyplot(plot_otherFeatures(user_df))
             
             with col2:
                 st.header(":green[BB Year End] Breakdown")
@@ -217,6 +312,7 @@ if(go):
                 st.pyplot(bb_data['piechart'])
                 st.subheader(":green[Loud]ness")
                 st.pyplot(bb_data['loudness'])
+                st.caption("In decibels (dB). ")
                 st.subheader(":green[Key]/Pitch")
                 st.pyplot(bb_data['key'])
                 st.subheader(":green[Tempo] (Beats Per Minute)")
