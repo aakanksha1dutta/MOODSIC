@@ -190,6 +190,7 @@ if(go):
         fig.set_facecolor('#0F0F0F')
         axs.pie(data, labels=labels, labeldistance=0.4, autopct='%.0f%%', wedgeprops = {"edgecolor" : "black", 'linewidth': 2, 'antialiased': True}, colors = colors, 
         textprops=dict(color='w',weight='bold')) 
+        axs.legend(labels)
         return fig
     
     def plot_tempo(df):
@@ -214,6 +215,7 @@ if(go):
         axs.spines['left'].set_color('white')
         axs.tick_params(color='white', labelcolor='white')
         axs.set_xlabel('Loudness / dB').set_color('white')
+        axs.set_xlim(-60,0)
         axs.set_ylabel('Probability Density Function').set_color('white')
         return fig
     
@@ -255,6 +257,7 @@ if(go):
         axs.spines['left'].set_color('white')
         axs.tick_params(color='white', labelcolor='white')
         axs.set_xlabel('Value').set_color('white')
+        axs.set_xlim(0,1)
         axs.set_ylabel('Track Features').set_color('white')
         sns.barplot(data = features_adj, orient="y", errorbar=None, palette=colors, ax=axs)
         return fig
@@ -281,6 +284,12 @@ if(go):
         #display
         with main_area.container():
 
+            with st.expander("What just happened? :flushed:"):
+                st.write("**MOODSIC** took at most 100 songs of your given collection (or top 10 songs of an artist) and produced charts that breaks the audio profile of your songs.")
+                st.write("Expand the notes under each chart for a brief explanation on each feature.")
+                st.write("Compare your charts (left) with the BillBoard Hot 100 Year End songs from 2023 (right).")
+            st.divider()
+
             st.metric(label = ":green[%] of Energetic Tracks in Collection",value = "{:.2f}%".format(user_prop), delta="{:.2f}%".format(ratio))
             st.caption("* ↑↓ shows the percentage difference between your collection and BB chart")
 
@@ -288,21 +297,70 @@ if(go):
 
             with col1:
                 st.header(":green[Your Collection] Breakdown")
+
                 st.subheader(":green[Energetic] Tracks")
                 st.dataframe(user_energetic_tracks, hide_index=True, column_config={'first_artist':'First Artist','track_name':'Track'}, height = 500)
+                st.expander("What does this mean?").write(
+                    "This table shows a list of all energetic songs in your playlist. Click on full screen to enlarge it or download button to download the \
+                        full table as a .csv file."
+                )
+
                 st.subheader(":green[Composition]")
                 st.pyplot(piechart(user_energetic_tracks,user_df))
+                st.expander("What does this mean?").markdown(
+                    "Shows the **percentage** of songs in your collection that are classified as energetic or not."
+                )
+
                 st.subheader(":green[Loud]ness")
                 st.pyplot(plot_loudness(user_df))
-                st.caption("In decibels (dB).")
+                st.expander("What does this mean?").markdown(
+                    "Loudness strongly influences the liveliness of a track, \
+                        so louder songs are perceived as happier and more energetic songs. \
+                        Loudness correlates to physical strength (amplitude). Values typically range between **-60** and **0 db**."
+                )
+                
+
                 st.subheader(":green[Key]/Pitch")
                 st.pyplot(plot_key(user_df))
+                with st.expander("What does this mean?"):
+                    st.markdown(
+                    "The key/pitch the track is in. Integers map to pitches using standard Pitch Class notation, described as below")
+                    keys = pd.DataFrame({'Integer': np.arange(0,12),'Pitch':['C#','C♯, D♭', 'D','D♯, E♭','E','F','F♯, G♭','G','G♯, A♭','A','A♯, B♭','B']})
+                    keys.set_index('Integer', inplace=True)
+                    st.table(keys)
+                    st.write("-1 if if no key detected")
+
                 st.subheader(":green[Tempo] (Beats Per Minute)")
                 st.pyplot(plot_tempo(user_df))
+                st.expander("What does this mean?").write(
+                    "Tempo considers the speed or beats per minute of the tracks in the playlist. \
+                        High tempos are associated with making songs sound more lively and energetic due to the fast pacing."
+                )
+
                 st.subheader("Major vs Minor :green[Scale]")
                 st.pyplot(plot_mode(user_df))
+                st.expander("What does this mean?").write(
+                    "In Western music, generally, \
+                        major scales are associated with evoking happier (energetic) emotions and minor scales with sadder emotions.\
+                            This countplot shows the scale distribution of the collection."
+                )
+
                 st.subheader("Other :green[Features]")
                 st.pyplot(plot_otherFeatures(user_df))
+                with st.expander("What does this mean?"):
+                    st.write(
+                    'Spotify measures all the following values on a scale of 0.0 to 1.0.')
+                    st.markdown("- *Danceability* describes how suitable a track is for dancing based on a \
+                        combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.")
+                    st.markdown("- *Energy* represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. \
+                            Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.")
+                    st.markdown("- *Speechiness* detects the presence of spoken words in a track. The more exclusively speech-like the recording, the closer to 1.0 the attribute value.")
+                    st.markdown("- *Acousticness* is a confidence measure of whether the track is acoustic with 1.0 representing high confidence the track is acoustic.")
+                    st.markdown('- *Instrumentalness* predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context.\
+                        The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content.')
+                    st.markdown('- *Liveness* detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live.')
+                    st.markdown('- *Valence* describes the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), \
+                        while tracks with low valence sound more negative (e.g. sad, depressed, angry).')
             
             with col2:
                 st.header(":green[BB Year End] Breakdown")
@@ -312,7 +370,6 @@ if(go):
                 st.pyplot(bb_data['piechart'])
                 st.subheader(":green[Loud]ness")
                 st.pyplot(bb_data['loudness'])
-                st.caption("In decibels (dB). ")
                 st.subheader(":green[Key]/Pitch")
                 st.pyplot(bb_data['key'])
                 st.subheader(":green[Tempo] (Beats Per Minute)")
@@ -321,7 +378,10 @@ if(go):
                 st.pyplot(bb_data['mode'])
                 st.subheader("Other :green[Features]")
                 st.pyplot(bb_data['otherFeatures'])
-                
+
+    st.divider()    
+
+st.write("Created with :love_letter: by [Aakanksha Dutta](https://github.com/aakanksha1dutta) and [Aabha Pandit](https://github.com/aabpandit)")              
 
 
 
