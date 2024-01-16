@@ -64,7 +64,7 @@ st.header("Check your music's energy and more", divider="green")
 st.write('**M00DSIC** takes in any Spotify link to a public collection, be it an album, playlist or an artist, \
          and shows you simple visualization that breaks down your collection into its bare components.')
 
-st.write('Powered by a machine learning algorithm model called Support Vector Machines and Spotify Web API, **M00DSIC**\
+st.write('Powered by a machine learning model called Support Vector Machines and Spotify Web API, **M00DSIC**\
          delivers audio features about your playlist. Even better, you get to see a side by side comparison\
          of your collection with  *Billboard Year End Hot 100 Chart of 2023*.')
 st.markdown('`Note: Due to Spotify API limits, M00DSIC can only read first 100 tracks of a playlist or an album and Top 10 tracks\
