@@ -23,7 +23,7 @@ We are creating this Theory.md file to serve as a central knowledge base behind 
 2. **Different Scalers** : We used different scalers to scale our features at first. This was a grave error since that meant our features for our training sample and the use cases sample were scaled very differently. 
     * So, we fit a scaler to our training sample and then pickled it with our model in `model.pk1`, to use with other datasets..
 
-3. **Unbalanced dataset**: Since 1/4th of our training dataset was Energetic, we could either drop some rows (undersampling) of Non Energetic or get more samples of Energetic. We chose to do the latter since our dataset was already small. 
+3. **Unbalanced dataset**: Since 1/4th of our training dataset was Energetic, we could either drop some rows (undersampling) of Non Energetic or get more samples of Energetic(oversampling). We chose to do the latter since our dataset was already small. 
     * We used SMOTE (Synthetic Minority Oversampling Technique) from the `imblearn` library. 
     * Since there is a possibility of overfitting using SMOTE, we used f1-score, precision, recall for both classes as a marker of our model performance instead of accuracy (see, [Accuracy Paradox](https://en.wikipedia.org/wiki/Accuracy_paradox#:~:text=The%20accuracy%20paradox%20is%20the,too%20crude%20to%20be%20useful.))
 
