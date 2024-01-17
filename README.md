@@ -10,7 +10,7 @@
 - who is in the Music Industry and needs a top level overview of songs that public likes vs. another collection.
 - does Music industry research. If one uses 2023 year as a base year to compare with another collection containing BB Year End songs of previous years or future years.
 - looking for Fun. Compare how their collections differ from the top songs of 2023. 
-- wants to get a feature breakdown of artists, albums or playlists.
+- wanting to get a feature breakdown of artists, albums or playlists.
 
 ## How to download and use code repo
 
