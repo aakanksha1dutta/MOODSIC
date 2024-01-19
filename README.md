@@ -1,6 +1,6 @@
-# M00DSIC
+# [M00DSIC](https://m00dsic.streamlit.app)
 
-**M00DSIC** is a ML web app that classifies and breaks down a given public Spotify collection into Energetic or Non Energetic mood. It displays charts for the collection alongside the BillBoard Year End chart of 2023 for comparison. It shows detailed charts for important audio features of both collections. 
+[**M00DSIC**](https://m00dsic.streamlit.app) is a ML web app that classifies and breaks down a given public Spotify collection into Energetic or Non Energetic mood. It displays charts for the collection alongside the BillBoard Year End chart of 2023 for comparison. It shows detailed charts for important audio features of both collections. 
 
 **M00DSIC** uses Support Vector Machines with a Radial kernel.
 
